@@ -194,7 +194,7 @@ namespace Scacchi.Modello
         }
 
         [Fact]
-        public void IlCavalloBiancoPuoMuovereSoloAdL(){
+        public void IlCavalloPuoMuovereSoloAdL(){
                 //Given
                 Cavallo cavallo = new Cavallo(Colore.Nero);
                 //When
@@ -250,7 +250,7 @@ namespace Scacchi.Modello
         }
 
         [Fact]
-        public void LaReginaPuoMuovereSoloInDiagonaleOrizzontaleEVertical(){
+        public void LaReginaPuoMuovereSoloInDiagonaleOrizzontaleEVerticale(){
                 //Given
                 Regina regina = new Regina(Colore.Nero);
                 //When
