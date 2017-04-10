@@ -77,6 +77,7 @@ namespace Scacchi.Tests {
 
         /*Quando si cambia giocatore, il tempo deve arrestarsi per il giocatore precedente ed iniziare a
         decrescere per il giocatore attualmente di turno*/
+  
         [Fact]
         public void QuandoBiancoPassaIlTurnoIlTempoAvanzaPerNero()
         {
@@ -116,9 +117,10 @@ namespace Scacchi.Tests {
         orologio1.TempoIniziale - tolleranza,
         orologio1.TempoIniziale);
         }
-        
+
         /*Quando resetta l'orologio, il tempo deve essere reimpostato a 5 minuti per entrambi i giocatori.
         Il tempo residuo resterà fermo per entrambi i giocatori finché l'utente non lo avvia*/
+    
         [Fact]
         public void SulResetSiRicominciaDalTempoIniziale()
         {
@@ -153,6 +155,7 @@ namespace Scacchi.Tests {
         }
 
         /*Sollevare l'evento `TempoScaduto` quando il tempo residuo del giocatore di turno arriva a zero.*/
+     
         [Fact]
         public void QuandoIlTempoDiUnGiocatoreScendeAZeroDeveEssereSollevatoTempoScaduto()
         {
