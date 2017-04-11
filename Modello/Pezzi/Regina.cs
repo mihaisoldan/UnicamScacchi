@@ -1,30 +1,35 @@
 using System;
 
-namespace Scacchi.Modello.Pezzi{
+namespace Scacchi.Modello.Pezzi {
     public class Regina : IPezzo
     {
         private readonly Colore colore;
-
-        public Regina(Colore colore){
-            this.colore = colore;
+        public Regina(Colore colore)
+        {
+            this.colore = colore;    
         }
-
-        public Colore Colore{
-            get{
+        public Colore Colore {
+            get {
                 return colore;
             }
         }
-
-        public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo)
+        public bool PuòMuovere(
+            Colonna colonnaPartenza,
+            Traversa traversaPartenza,
+            Colonna colonnaArrivo,
+            Traversa traversaArrivo)
         {
-            var stessaColonna = colonnaPartenza == colonnaArrivo;
+            var stessaColonna = colonnaPartenza == colonnaArrivo ;
             var stessaTraversa = traversaPartenza == traversaArrivo;
-            var distanzaTraLeColonne = Math.Abs(colonnaPartenza - colonnaArrivo);
-            var distanzaTraLeTraverse = Math.Abs(traversaPartenza - traversaArrivo);
-
-            if((distanzaTraLeColonne == distanzaTraLeTraverse && distanzaTraLeColonne!=0)||(stessaColonna ^ stessaTraversa))
-                return true;
-            return false;
+            var differenzaTraLeColonne = Math.Abs((int) colonnaArrivo - (int) colonnaPartenza) ;
+            var differenzaTraLeTraverse = Math.Abs((int) traversaArrivo - (int) traversaPartenza) ;
+            
+           if((stessaColonna && differenzaTraLeTraverse!=0) || (stessaTraversa && differenzaTraLeColonne !=0) || (differenzaTraLeColonne == differenzaTraLeTraverse && differenzaTraLeColonne != 0)){
+               return true;
+           }else{
+               return false;
+           }
         }
+
     }
 }
