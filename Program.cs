@@ -8,7 +8,7 @@ namespace Scacchi
         static void Main(string[] args)
         {
            // SimpleXUnitRunner.SimpleXUnit.RunTests();
-           IOrologio orologio = new Orologio(TimeSpan.FromSeconds(5));
+           IOrologio orologio = new Orologio();
            orologio.Accendi();
            orologio.Avvia();
            orologio.TempoScaduto += NotificaSconfitta;
