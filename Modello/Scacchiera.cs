@@ -82,5 +82,24 @@ namespace Scacchi.Modello {
         return listaCase[(int) colonna-1+(((int) traversa-1)*8)];
       }
     }
+    public void visualizzaConfigurazione(){
+      int i = 1;
+      System.Console.WriteLine("   | A  | B  | C  | D  | E  | F  | G  | H  |");
+      System.Console.WriteLine("-------------------------------------------");
+      foreach(Traversa traversa in Enum.GetValues(typeof(Traversa))){
+        System.Console.Write($" {i} |");
+        i++;
+        foreach(Colonna colonna in Enum.GetValues(typeof(Colonna))){
+          IPezzo pezzo = this[colonna,traversa].PezzoPresente;
+          if(pezzo != null){
+           System.Console.Write(string.Format(" {0} |",pezzo.ToString()));
+          }
+          else
+            System.Console.Write(string.Format("    |"));
+          
+        }
+        System.Console.WriteLine("\n-------------------------------------------");
+      }
+    }
   }
 }

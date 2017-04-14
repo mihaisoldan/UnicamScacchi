@@ -1,36 +1,41 @@
 using System;
 
 namespace Scacchi.Modello.Pezzi {
-    public class Donna : IPezzo
+  public class Donna : IPezzo
+  {
+    private readonly Colore colore;
+    public Donna(Colore colore)
     {
-        private readonly Colore colore;
-        public Donna(Colore colore)
-        {
-            this.colore = colore;    
-        }
-        public Colore Colore {
-            get {
-                return colore;
-            }
-        }
-        public bool PuòMuovere(
-            Colonna colonnaPartenza,
-            Traversa traversaPartenza,
-            Colonna colonnaArrivo,
-            Traversa traversaArrivo,
-            IScacchiera scacchiera = null)
-        {
-            var stessaColonna = colonnaPartenza == colonnaArrivo ;
-            var stessaTraversa = traversaPartenza == traversaArrivo;
-            var differenzaTraLeColonne = Math.Abs((int) colonnaArrivo - (int) colonnaPartenza) ;
-            var differenzaTraLeTraverse = Math.Abs((int) traversaArrivo - (int) traversaPartenza) ;
-            
-           if((stessaColonna && differenzaTraLeTraverse!=0) || (stessaTraversa && differenzaTraLeColonne !=0) || (differenzaTraLeColonne == differenzaTraLeTraverse && differenzaTraLeColonne != 0)){
-               return true;
-           }else{
-               return false;
-           }
-        }
-
+      this.colore = colore;
     }
+    public Colore Colore {
+      get {
+        return colore;
+      }
+    }
+    public bool PuòMuovere(
+    Colonna colonnaPartenza,
+    Traversa traversaPartenza,
+    Colonna colonnaArrivo,
+    Traversa traversaArrivo,
+    IScacchiera scacchiera = null)
+    {
+      var stessaColonna = colonnaPartenza == colonnaArrivo ;
+      var stessaTraversa = traversaPartenza == traversaArrivo;
+      var differenzaTraLeColonne = Math.Abs((int) colonnaArrivo - (int) colonnaPartenza) ;
+      var differenzaTraLeTraverse = Math.Abs((int) traversaArrivo - (int) traversaPartenza) ;
+
+      if((stessaColonna && differenzaTraLeTraverse!=0) || (stessaTraversa && differenzaTraLeColonne !=0) || (differenzaTraLeColonne == differenzaTraLeTraverse && differenzaTraLeColonne != 0)){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    public override String ToString(){
+      string name = "";
+      name += this.GetType().Name[0];
+      name+= this.colore == Colore.Bianco? "b" : "n";
+      return name;
+    }
+  }
 }

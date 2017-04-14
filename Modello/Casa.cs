@@ -7,12 +7,13 @@ namespace Scacchi.Modello
     {
         private Colonna colonna;
         private Traversa traversa;
+        private IPezzo pezzoPresente;
         public Casa(Colonna colonna, Traversa traversa){
             this.colonna=colonna;
             this.traversa=traversa;
         }
 
-    
+
         public Colonna Colonna {
             get{return colonna;}
         }
@@ -21,6 +22,13 @@ namespace Scacchi.Modello
             get{return traversa;}
         }
 
-        public IPezzo PezzoPresente { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IPezzo PezzoPresente {
+            get {
+                return pezzoPresente;
+            }
+            set {
+                pezzoPresente = value;
+            }
+        }
     }
 }
