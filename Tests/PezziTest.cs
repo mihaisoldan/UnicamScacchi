@@ -204,13 +204,13 @@ namespace Scacchi.Modello
                 //Then
                 Assert.False(esito);
         }
-/*------------------------------------Regina-------------------------------------- */
+/*------------------------------------Donna-------------------------------------- */
 [Fact]
-        public void LaReginaPuoMuovereInVerticale(){
+        public void LaDonnaPuoMuovereInVerticale(){
             //Given
-            Regina regina = new Regina(Colore.Nero);
+            Donna donna = new Donna(Colore.Nero);
             //When
-            bool esito = regina.PuòMuovere(
+            bool esito = donna.PuòMuovere(
                 colonnaPartenza: Colonna.A,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.A,
@@ -220,11 +220,11 @@ namespace Scacchi.Modello
 
         }
         [Fact]
-        public void LaReginaPuoMuovereInOrizzontale(){
+        public void LaDonnaPuoMuovereInOrizzontale(){
             //Given
-            Regina regina = new Regina(Colore.Nero);
+            Donna donna = new Donna(Colore.Nero);
             //When
-            bool esito = regina.PuòMuovere(
+            bool esito = donna.PuòMuovere(
                 colonnaPartenza: Colonna.A,
                 traversaPartenza: Traversa.Prima,
                 colonnaArrivo: Colonna.F,
@@ -234,11 +234,11 @@ namespace Scacchi.Modello
         }
 
         [Fact]
-        public void LaReginaPuoMuovereInDiagonale(){
+        public void LaDonnaPuoMuovereInDiagonale(){
                 //Given
-            Regina regina = new Regina(Colore.Nero);
+            Donna donna = new Donna(Colore.Nero);
             //When
-            bool esito = regina.PuòMuovere(
+            bool esito = donna.PuòMuovere(
                     colonnaPartenza: Colonna.A,
                     traversaPartenza: Traversa.Prima,
                     colonnaArrivo: Colonna.F,
@@ -248,11 +248,11 @@ namespace Scacchi.Modello
         }
 
         [Fact]
-        public void LaReginaPuoMuovereSoloInDiagonaleOrizzontaleEVerticale(){
+        public void LaDonnaPuoMuovereSoloInDiagonaleOrizzontaleEVerticale(){
                 //Given
-                Regina regina = new Regina(Colore.Nero);
+                Donna donna = new Donna(Colore.Nero);
                 //When
-                bool esito = regina.PuòMuovere(
+                bool esito = donna.PuòMuovere(
                     colonnaPartenza: Colonna.F,
                     traversaPartenza: Traversa.Ottava,
                     colonnaArrivo: Colonna.C,
