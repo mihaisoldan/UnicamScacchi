@@ -7,21 +7,6 @@ namespace Scacchi.Modello {
   public class Scacchiera : IScacchiera
   {
     private ICasa[] listaCase;
-
-    /*public Scacchiera(){
-    listaCase= new ICasa[64];
-    int contatore=0;
-    for (int i = 1; i < 9; i++)
-    {
-    for (int j = 1; j < 9; j++,contatore++)
-    {
-    ICasa casa = new Casa((Colonna)j,(Traversa)i);
-    listaCase[contatore] = casa;
-  }
-}
-
-}*/
-
     public Scacchiera()
     {
       listaCase = Enumerable

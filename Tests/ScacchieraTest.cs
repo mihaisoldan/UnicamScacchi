@@ -1,5 +1,7 @@
+using System;
 using System.Linq;
 using Scacchi.Modello;
+using Scacchi.Modello.Pezzi;
 using Xunit;
 
 namespace Scacchi.Tests{
@@ -36,6 +38,23 @@ namespace Scacchi.Tests{
       ICasa casa = scacchiera[Colonna.B,Traversa.Prima];
       //Then
       Assert.Null(casa.PezzoPresente);
+    }
+    [Theory]
+    [InlineData(typeof(Alfiere),Colore.Bianco,Colonna.C,Traversa.Prima)]
+    [InlineData(typeof(Donna),Colore.Nero,Colonna.D,Traversa.Ottava)]
+    [InlineData(typeof(Pedone),Colore.Bianco,Colonna.F,Traversa.Seconda)]
+    [InlineData(typeof(Cavallo),Colore.Nero,Colonna.G,Traversa.Ottava)]
+    [InlineData(typeof(Torre),Colore.Nero,Colonna.H,Traversa.Ottava)]
+    public void iPezziVengonoInseritiNellaPosizioneGiusta(Type pezzo,
+    Colore colore, Colonna colonna, Traversa traversa){
+      //Given
+      Scacchiera scacchiera = new Scacchiera();
+      //When
+      scacchiera.disponiPezziInConfigurazioneIniziale();
+      ICasa casa = scacchiera[colonna, traversa];
+      //Then
+      Assert.Equal(casa.PezzoPresente.GetType(), pezzo);
+      Assert.Equal(casa.PezzoPresente.Colore, colore);     
     }
   }
 }
