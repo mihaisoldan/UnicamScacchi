@@ -15,7 +15,11 @@ namespace Scacchi.Modello.Pezzi{
             }
         }
 
-        public bool PuòMuovere(Colonna colonnaPartenza, Traversa traversaPartenza, Colonna colonnaArrivo, Traversa traversaArrivo)
+        public bool PuòMuovere(Colonna colonnaPartenza, 
+        Traversa traversaPartenza, 
+        Colonna colonnaArrivo, 
+        Traversa traversaArrivo,
+        IScacchiera scacchiera = null)
         {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
             var stessaTraversa = traversaPartenza == traversaArrivo;

@@ -16,7 +16,8 @@ namespace Scacchi.Modello.Pezzi {
             Colonna colonnaPartenza,
             Traversa traversaPartenza,
             Colonna colonnaArrivo,
-            Traversa traversaArrivo)
+            Traversa traversaArrivo,
+            IScacchiera scacchiera = null)
         {
             var stessaColonna = colonnaPartenza == colonnaArrivo;
             var distanzaTraLeTraverse = (int) traversaArrivo - (int) traversaPartenza;
