@@ -140,7 +140,7 @@ namespace Scacchi.Tests {
         Assert.Equal(orologio1.TempoResiduoBianco, orologio1.TempoIniziale);
         Assert.Equal(orologio1.TempoResiduoNero, orologio1.TempoIniziale);
         }
-
+/*
         [Fact]
         public void QuandoAvvioSenzaAccendereDeveVerificarsiUnEccezione()
         {
@@ -153,7 +153,7 @@ namespace Scacchi.Tests {
                 orologio1.Avvia();
         });
         }
-
+*/
         /*Sollevare l'evento `TempoScaduto` quando il tempo residuo del giocatore di turno arriva a zero.*/
      
         [Fact]
