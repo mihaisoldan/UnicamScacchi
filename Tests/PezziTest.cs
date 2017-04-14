@@ -24,16 +24,21 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
+
         [Theory]
         [InlineData(typeof(Donna))]
         [InlineData(typeof(Pedone))]
-        public void IlPedoneNonPuòRestareFermo(Type t) {
+        [InlineData(typeof(Cavallo))]
+        [InlineData(typeof(Alfiere))]
+        [InlineData(typeof(Re))]
+        [InlineData(typeof(Torre))]
+        public void IPezziNonPossonoRestareFermi(Type t) {
             //Given
             IPezzo pezzo = Activator.CreateInstance(t, Colore.Bianco) as IPezzo;
             //When
             bool esito = pezzo.PuòMuovere(Colonna.A, Traversa.Prima, Colonna.A, Traversa.Prima);
             //Then
-            Assert.True(esito, t.Name);
+            Assert.False(esito, t.Name);
         }
         [Fact]
         public void IlPedoneBiancoNonPuoMuovereIndietroDiUnaCasa(){
@@ -91,25 +96,14 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-        [Fact]
-        public void IlPedoneNonPuòRimanereSullaStessaCasa(){
-            //Given
-            Pedone pedone = new Pedone(Colore.Nero);
-            //When
-            bool esito = pedone.PuòMuovere(
-                colonnaPartenza: Colonna.A,
-                traversaPartenza: Traversa.Settima,
-                colonnaArrivo: Colonna.A,
-                traversaArrivo: Traversa.Settima);
-            //Then
-            Assert.False(esito);
-        }
 
 /*--------------------------------------------TORRE--------------------------------------- */
-        [Fact]
-        public void LaTorrePuoMuovereInVerticale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorrePuoMuovereInVerticale(Colore colore){
             //Given
-            Torre torre = new Torre(Colore.Nero);
+            Torre torre = new Torre(colore);
             //When
             bool esito = torre.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -120,10 +114,12 @@ namespace Scacchi.Modello
             Assert.True(esito);
 
         }
-        [Fact]
-        public void LaTorrePuoMuovereInOrizzontale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorrePuoMuovereInOrizzontale(Colore colore){
             //Given
-            Torre torre = new Torre(Colore.Nero);
+            Torre torre = new Torre(colore);
             //When
             bool esito = torre.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -133,10 +129,12 @@ namespace Scacchi.Modello
             //Then
             Assert.True(esito);
         }
-        [Fact]
-        public void LaTorreNonPuoMuovereInDiagonale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaTorreNonPuoMuovereInDiagonale(Colore colore){
             //Given
-            Torre torre = new Torre(Colore.Bianco);
+            Torre torre = new Torre(colore);
             //When
             bool esito = torre.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -147,10 +145,12 @@ namespace Scacchi.Modello
             Assert.False(esito);
         }
 /*--------------------------------------ALFIERE------------------------------- */
-        [Fact]
-        public void LAlfierePuoMuovereInDiagonale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LAlfierePuoMuovereInDiagonale(Colore colore){
                 //Given
-                Alfiere alfiere = new Alfiere(Colore.Bianco);
+                Alfiere alfiere = new Alfiere(colore);
                 //When
                 bool esito = alfiere.PuòMuovere(
                     colonnaPartenza: Colonna.A,
@@ -160,11 +160,12 @@ namespace Scacchi.Modello
                 //Then
                 Assert.True(esito);
         }
-
-        [Fact]
-        public void LAlfierePuoMuovereSoloInDiagonale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LAlfierePuoMuovereSoloInDiagonale(Colore colore){
                 //Given
-                Alfiere alfiere = new Alfiere(Colore.Nero);
+                Alfiere alfiere = new Alfiere(colore);
                 //When
                 bool esito = alfiere.PuòMuovere(
                     colonnaPartenza: Colonna.F,
@@ -177,10 +178,12 @@ namespace Scacchi.Modello
 
 /*--------------------------------CAVALLO---------------------------------------- */
 
-[Fact]
-        public void IlCavalloPuoMuovereAdL(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlCavalloPuoMuovereAdL(Colore colore){
                 //Given
-                Cavallo cavallo = new Cavallo(Colore.Bianco);
+                Cavallo cavallo = new Cavallo(colore);
                 //When
                 bool esito = cavallo.PuòMuovere(
                     colonnaPartenza: Colonna.B,
@@ -191,10 +194,12 @@ namespace Scacchi.Modello
                 Assert.True(esito);
         }
 
-        [Fact]
-        public void IlCavalloPuoMuovereSoloAdL(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlCavalloPuoMuovereSoloAdL(Colore colore){
                 //Given
-                Cavallo cavallo = new Cavallo(Colore.Nero);
+                Cavallo cavallo = new Cavallo(colore);
                 //When
                 bool esito = cavallo.PuòMuovere(
                     colonnaPartenza: Colonna.G,
@@ -205,10 +210,12 @@ namespace Scacchi.Modello
                 Assert.False(esito);
         }
 /*------------------------------------Donna-------------------------------------- */
-[Fact]
-        public void LaDonnaPuoMuovereInVerticale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaDonnaPuoMuovereInVerticale(Colore colore){
             //Given
-            Donna donna = new Donna(Colore.Nero);
+            Donna donna = new Donna(colore);
             //When
             bool esito = donna.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -219,10 +226,12 @@ namespace Scacchi.Modello
             Assert.True(esito);
 
         }
-        [Fact]
-        public void LaDonnaPuoMuovereInOrizzontale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaDonnaPuoMuovereInOrizzontale(Colore colore){
             //Given
-            Donna donna = new Donna(Colore.Nero);
+            Donna donna = new Donna(colore);
             //When
             bool esito = donna.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -233,10 +242,12 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-        [Fact]
-        public void LaDonnaPuoMuovereInDiagonale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaDonnaPuoMuovereInDiagonale(Colore colore){
                 //Given
-            Donna donna = new Donna(Colore.Nero);
+            Donna donna = new Donna(colore);
             //When
             bool esito = donna.PuòMuovere(
                     colonnaPartenza: Colonna.A,
@@ -247,10 +258,12 @@ namespace Scacchi.Modello
                 Assert.True(esito);
         }
 
-        [Fact]
-        public void LaDonnaPuoMuovereSoloInDiagonaleOrizzontaleEVerticale(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void LaDonnaPuoMuovereSoloInDiagonaleOrizzontaleVerticale(Colore colore){
                 //Given
-                Donna donna = new Donna(Colore.Nero);
+                Donna donna = new Donna(colore);
                 //When
                 bool esito = donna.PuòMuovere(
                     colonnaPartenza: Colonna.F,
@@ -262,10 +275,12 @@ namespace Scacchi.Modello
         }
 
 /*-----------------------------------------RE--------------------------------------------- */
-[Fact]
-        public void IlRePuoMuovereInVerticaleDiUno(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlRePuoMuovereInVerticaleDiUno(Colore colore){
             //Given
-            Re re = new Re(Colore.Nero);
+            Re re = new Re(colore);
             //When
             bool esito = re.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -276,10 +291,12 @@ namespace Scacchi.Modello
             Assert.True(esito);
 
         }
-        [Fact]
-        public void IlRePuoMuovereInOrizzontaleDiUno(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlRePuoMuovereInOrizzontaleDiUno(Colore colore){
             //Given
-            Re re = new Re(Colore.Nero);
+            Re re = new Re(colore);
             //When
             bool esito = re.PuòMuovere(
                 colonnaPartenza: Colonna.A,
@@ -290,10 +307,12 @@ namespace Scacchi.Modello
             Assert.True(esito);
         }
 
-        [Fact]
-        public void IlRePuoMuovereInDiagonaleDiUno(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlRePuoMuovereInDiagonaleDiUno(Colore colore){
             //Given
-            Re re = new Re(Colore.Nero);
+            Re re = new Re(colore);
             //When
             bool esito = re.PuòMuovere(
                     colonnaPartenza: Colonna.A,
@@ -304,10 +323,12 @@ namespace Scacchi.Modello
                 Assert.True(esito);
         }
 
-        [Fact]
-        public void IlRePuoMuovereSoloDiUno(){
+        [Theory]
+        [InlineData(Colore.Bianco)]
+        [InlineData(Colore.Nero)]
+        public void IlRePuoMuovereSoloDiUno(Colore colore){
             //Given
-            Re re = new Re(Colore.Nero);
+            Re re = new Re(colore);
             //When
             bool esito = re.PuòMuovere(
                     colonnaPartenza: Colonna.F,

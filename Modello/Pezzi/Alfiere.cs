@@ -24,7 +24,7 @@ namespace Scacchi.Modello.Pezzi{
             var distanzaTraLeColonne = Math.Abs(colonnaPartenza - colonnaArrivo);
             var distanzaTraLeTraverse = Math.Abs(traversaPartenza - traversaArrivo);
 
-            if(distanzaTraLeColonne == distanzaTraLeTraverse)
+            if(distanzaTraLeColonne == distanzaTraLeTraverse && distanzaTraLeColonne!=0)
                 return true;
             return false;
         }
