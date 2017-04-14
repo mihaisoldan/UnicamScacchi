@@ -12,5 +12,6 @@ namespace Scacchi.Modello.Pezzi
             Traversa traversaArrivo,
             IScacchiera scacchiera = null);
         Colore Colore { get; }
+        string ToString();
     }
 }
