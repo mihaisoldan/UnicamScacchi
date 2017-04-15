@@ -19,17 +19,16 @@ namespace Scacchi.Modello.Pezzi{
     Traversa traversaPartenza,
     Colonna colonnaArrivo,
     Traversa traversaArrivo,
-    IScacchiera scacchiera = null)
+    IScacchiera scacchiera)
     {
-      var stessaColonna = colonnaPartenza == colonnaArrivo;
-      var stessaTraversa = traversaPartenza == traversaArrivo;
-      var distanzaTraLeColonne = Math.Abs(colonnaPartenza - colonnaArrivo);
-      var distanzaTraLeTraverse = Math.Abs(traversaPartenza - traversaArrivo);
-
-      if((distanzaTraLeColonne == distanzaTraLeTraverse && distanzaTraLeColonne==1)||(stessaColonna && distanzaTraLeTraverse==1)
-      || (stessaTraversa && distanzaTraLeColonne==1))
-      return true;
-      return false;
+      var comeLaDonna = ((colonnaPartenza == colonnaArrivo && 
+      Math.Abs(traversaPartenza - traversaArrivo) == 1) || 
+      (traversaPartenza == traversaArrivo && 
+      Math.Abs(colonnaArrivo -colonnaPartenza) ==1)) || 
+      (Math.Abs(colonnaPartenza - colonnaArrivo) == 1 && 
+      Math.Abs(traversaArrivo -traversaPartenza) == 1);
+      return new Donna(colore).PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo,scacchiera);
     }
     public override String ToString(){
       string name = "";
