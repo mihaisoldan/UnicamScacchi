@@ -296,6 +296,7 @@ namespace Scacchi.Modello
       Assert.True(esito);
     }
     /*--------------------------------------ALFIERE------------------------------- */
+  
     [Theory]
     [InlineData(Colore.Bianco)]
     [InlineData(Colore.Nero)]
@@ -356,6 +357,33 @@ namespace Scacchi.Modello
       colonnaArrivo, traversaArrivo, scacchiera);
       //Then
       Assert.False(esito);
+    }
+
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.G, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.G, Traversa.Settima)]
+    [InlineData(Colonna.B,Traversa.Ottava, Colonna.G, Traversa.Terza,
+    Colore.Bianco, Colore.Nero, Colonna.G, Traversa.Terza)]
+    [InlineData(Colonna.F,Traversa.Settima, Colonna.C, Traversa.Quarta,
+    Colore.Nero, Colore.Bianco, Colonna.C, Traversa.Quarta)]
+    [InlineData(Colonna.D,Traversa.Terza, Colonna.H, Traversa.Settima,
+    Colore.Nero, Colore.Bianco, Colonna.H, Traversa.Settima)]
+    public void lAlfierePuòMangiareInDiagonale(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Alfiere alfiere = new Alfiere(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = alfiere.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo, scacchiera);
+      //Then
+      Assert.True(esito);
     }
 
     /*--------------------------------CAVALLO---------------------------------------- */
