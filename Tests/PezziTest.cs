@@ -268,6 +268,33 @@ namespace Scacchi.Modello
       //Then
       Assert.False(esito);
     }
+
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.B, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.B, Traversa.Settima)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.H, Traversa.Seconda,
+    Colore.Bianco, Colore.Nero, Colonna.H, Traversa.Seconda)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.B, Traversa.Seconda,
+    Colore.Nero, Colore.Bianco, Colonna.B, Traversa.Seconda)]
+    [InlineData(Colonna.D,Traversa.Settima, Colonna.A, Traversa.Settima,
+    Colore.Nero, Colore.Bianco, Colonna.A, Traversa.Settima)]
+    public void laTorrePuòMangiarePezzoAvversarioInOrizzontaleEVerticale(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Torre torre = new Torre(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = torre.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo, scacchiera);
+      //Then
+      Assert.True(esito);
+    }
     /*--------------------------------------ALFIERE------------------------------- */
     [Theory]
     [InlineData(Colore.Bianco)]
