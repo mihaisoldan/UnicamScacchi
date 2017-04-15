@@ -134,6 +134,60 @@ namespace Scacchi.Modello
       //Then
       Assert.False(esito);
     }
+
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.C, Traversa.Terza,
+    Colore.Bianco, Colore.Nero, Colonna.C, Traversa.Terza)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.A, Traversa.Terza,
+    Colore.Bianco, Colore.Nero,Colonna.A, Traversa.Terza)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.C, Traversa.Sesta,
+    Colore.Nero, Colore.Bianco, Colonna.C, Traversa.Sesta)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.A, Traversa.Sesta,
+    Colore.Nero, Colore.Bianco, Colonna.A, Traversa.Sesta)]
+    public void ilPedonePuòMangiareUnPezzoAvversarioInDiagonaleDiUno(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Pedone pedone = new Pedone(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = pedone.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo,scacchiera);
+      //Then
+      Assert.True(esito);
+    }
+
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.C, Traversa.Terza,
+    Colore.Bianco, Colore.Bianco, Colonna.C, Traversa.Terza)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.A, Traversa.Terza,
+    Colore.Bianco, Colore.Bianco,Colonna.A, Traversa.Terza)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.C, Traversa.Sesta,
+    Colore.Nero, Colore.Nero, Colonna.C, Traversa.Sesta)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.A, Traversa.Sesta,
+    Colore.Nero, Colore.Nero, Colonna.A, Traversa.Sesta)]
+    public void ilPedoneNonPuòMangiareUnPezzoDelloStessoColoreInDiagonaleDiUno(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Pedone pedone = new Pedone(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = pedone.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo,scacchiera);
+      //Then
+      Assert.False(esito);
+    }
     /*--------------------------------------------TORRE--------------------------------------- */
     [Theory]
     [InlineData(Colore.Bianco)]
@@ -187,6 +241,33 @@ namespace Scacchi.Modello
       //Then
       Assert.False(esito);
     }
+
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.B, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.B, Traversa.Terza)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.H, Traversa.Seconda,
+    Colore.Bianco, Colore.Bianco, Colonna.F, Traversa.Seconda)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.B, Traversa.Seconda,
+    Colore.Nero, Colore.Bianco, Colonna.B, Traversa.Sesta)]
+    [InlineData(Colonna.D,Traversa.Settima, Colonna.A, Traversa.Settima,
+    Colore.Nero, Colore.Nero, Colonna.A, Traversa.Settima)]
+    public void laTorreNonSiPuòMuovereSeUnPezzoBloccaLoSpostamento(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Torre torre = new Torre(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = torre.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo, scacchiera);
+      //Then
+      Assert.False(esito);
+    }
     /*--------------------------------------ALFIERE------------------------------- */
     [Theory]
     [InlineData(Colore.Bianco)]
@@ -219,6 +300,33 @@ namespace Scacchi.Modello
       colonnaArrivo: Colonna.C,
       traversaArrivo: Traversa.Quarta,
       scacchiera: scacchiera);
+      //Then
+      Assert.False(esito);
+    }
+
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.G, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.D, Traversa.Quarta)]
+    [InlineData(Colonna.B,Traversa.Ottava, Colonna.G, Traversa.Terza,
+    Colore.Bianco, Colore.Bianco, Colonna.E, Traversa.Quinta)]
+    [InlineData(Colonna.F,Traversa.Settima, Colonna.C, Traversa.Quarta,
+    Colore.Nero, Colore.Bianco, Colonna.E, Traversa.Sesta)]
+    [InlineData(Colonna.D,Traversa.Terza, Colonna.H, Traversa.Settima,
+    Colore.Nero, Colore.Nero, Colonna.H, Traversa.Settima)]
+    public void lAlfiereNonSiPuòMuovereSeUnPezzoBloccaLoSpostamento(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Alfiere alfiere = new Alfiere(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = alfiere.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo, scacchiera);
       //Then
       Assert.False(esito);
     }
@@ -260,6 +368,34 @@ namespace Scacchi.Modello
       //Then
       Assert.False(esito);
     }
+/*
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.G, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.D, Traversa.Quarta)]
+    [InlineData(Colonna.B,Traversa.Ottava, Colonna.G, Traversa.Terza,
+    Colore.Bianco, Colore.Bianco, Colonna.E, Traversa.Quinta)]
+    [InlineData(Colonna.F,Traversa.Settima, Colonna.C, Traversa.Quarta,
+    Colore.Nero, Colore.Bianco, Colonna.E, Traversa.Sesta)]
+    [InlineData(Colonna.D,Traversa.Terza, Colonna.H, Traversa.Settima,
+    Colore.Nero, Colore.Nero, Colonna.H, Traversa.Settima)]
+    public void ilCavalloNonSiPuòMuovereSeLaCasaDiArrivoÈOccupata(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Alfiere alfiere = new Alfiere(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = alfiere.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo, scacchiera);
+      //Then
+      Assert.False(esito);
+    }
+*/
     /*------------------------------------Donna-------------------------------------- */
     [Theory]
     [InlineData(Colore.Bianco)]
