@@ -21,15 +21,13 @@ namespace Scacchi.Modello.Pezzi{
     Traversa traversaArrivo,
     IScacchiera scacchiera)
     {
-      var comeLaDonna = ((colonnaPartenza == colonnaArrivo && 
-      Math.Abs(traversaPartenza - traversaArrivo) == 1) || 
-      (traversaPartenza == traversaArrivo && 
-      Math.Abs(colonnaArrivo -colonnaPartenza) ==1)) || 
-      (Math.Abs(colonnaPartenza - colonnaArrivo) == 1 && 
-      Math.Abs(traversaArrivo -traversaPartenza) == 1);
-      return new Donna(colore).PuòMuovere(colonnaPartenza, traversaPartenza,
+      if(Math.Abs((int) (colonnaArrivo-colonnaPartenza) * 
+      (int) (traversaArrivo -traversaPartenza)) <= 1)
+        return new Donna(colore).PuòMuovere(colonnaPartenza, traversaPartenza,
       colonnaArrivo, traversaArrivo,scacchiera);
+      return false;
     }
+    
     public override String ToString(){
       string name = "";
       name += this.GetType().Name[0];

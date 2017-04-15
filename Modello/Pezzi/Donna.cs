@@ -20,10 +20,8 @@ namespace Scacchi.Modello.Pezzi {
     Traversa traversaArrivo,
     IScacchiera scacchiera)
     {
-      var comeLaTorre = colonnaPartenza == colonnaArrivo || 
-      traversaPartenza == traversaArrivo;
-      return comeLaTorre? (new Torre(colore).PuòMuovere(colonnaPartenza, traversaPartenza,
-      colonnaArrivo, traversaArrivo,scacchiera)) : (new Alfiere(colore)).
+      return new Torre(colore).PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo,scacchiera) || new Alfiere(colore).
       PuòMuovere(colonnaPartenza, traversaPartenza,colonnaArrivo, traversaArrivo,scacchiera);
     }
     public override String ToString(){
