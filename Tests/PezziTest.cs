@@ -551,6 +551,76 @@ namespace Scacchi.Modello
       Assert.False(esito);
     }
 
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.B, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.B, Traversa.Terza)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.H, Traversa.Seconda,
+    Colore.Bianco, Colore.Bianco, Colonna.F, Traversa.Seconda)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.B, Traversa.Seconda,
+    Colore.Nero, Colore.Bianco, Colonna.B, Traversa.Sesta)]
+    [InlineData(Colonna.D,Traversa.Settima, Colonna.A, Traversa.Settima,
+    Colore.Nero, Colore.Nero, Colonna.A, Traversa.Settima)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.G, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.D, Traversa.Quarta)]
+    [InlineData(Colonna.B,Traversa.Ottava, Colonna.G, Traversa.Terza,
+    Colore.Bianco, Colore.Bianco, Colonna.E, Traversa.Quinta)]
+    [InlineData(Colonna.F,Traversa.Settima, Colonna.C, Traversa.Quarta,
+    Colore.Nero, Colore.Bianco, Colonna.E, Traversa.Sesta)]
+    [InlineData(Colonna.D,Traversa.Terza, Colonna.H, Traversa.Settima,
+    Colore.Nero, Colore.Nero, Colonna.H, Traversa.Settima)]
+    public void laReginaNonSiPuòMuovereSeUnPezzoBloccaLoSpostamento(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Donna donna = new Donna(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = donna.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo, scacchiera);
+      //Then
+      Assert.False(esito);
+    }
+
+    [Theory]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.B, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.B, Traversa.Settima)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.H, Traversa.Seconda,
+    Colore.Bianco, Colore.Nero, Colonna.H, Traversa.Seconda)]
+    [InlineData(Colonna.B,Traversa.Settima, Colonna.B, Traversa.Seconda,
+    Colore.Nero, Colore.Bianco, Colonna.B, Traversa.Seconda)]
+    [InlineData(Colonna.D,Traversa.Settima, Colonna.A, Traversa.Settima,
+    Colore.Nero, Colore.Bianco, Colonna.A, Traversa.Settima)]
+    [InlineData(Colonna.B,Traversa.Seconda, Colonna.G, Traversa.Settima,
+    Colore.Bianco, Colore.Nero, Colonna.G, Traversa.Settima)]
+    [InlineData(Colonna.B,Traversa.Ottava, Colonna.G, Traversa.Terza,
+    Colore.Bianco, Colore.Nero, Colonna.G, Traversa.Terza)]
+    [InlineData(Colonna.F,Traversa.Settima, Colonna.C, Traversa.Quarta,
+    Colore.Nero, Colore.Bianco, Colonna.C, Traversa.Quarta)]
+    [InlineData(Colonna.D,Traversa.Terza, Colonna.H, Traversa.Settima,
+    Colore.Nero, Colore.Bianco, Colonna.H, Traversa.Settima)]
+    public void laDonnaPuòMangiarePezzoAvversarioInOrizzontaleVerticaleDiagonale(
+    Colonna colonnaPartenza, Traversa traversaPartenza,
+    Colonna colonnaArrivo, Traversa traversaArrivo,
+    Colore colore, Colore colorePezzoBloccante,
+    Colonna colonnaPezzoBloccante,
+    Traversa traversaPezzoBloccante){
+      //Given
+      Donna donna = new Donna(colore);
+      Scacchiera scacchiera = new Scacchiera();
+      scacchiera[colonnaPezzoBloccante, traversaPezzoBloccante].PezzoPresente = 
+      new Pedone(colorePezzoBloccante);
+      //When
+      bool esito = donna.PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo, scacchiera);
+      //Then
+      Assert.True(esito);
+    }
+
     /*-----------------------------------------RE--------------------------------------------- */
     [Theory]
     [InlineData(Colore.Bianco)]

@@ -18,18 +18,13 @@ namespace Scacchi.Modello.Pezzi {
     Traversa traversaPartenza,
     Colonna colonnaArrivo,
     Traversa traversaArrivo,
-    IScacchiera scacchiera = null)
+    IScacchiera scacchiera)
     {
-      var stessaColonna = colonnaPartenza == colonnaArrivo ;
-      var stessaTraversa = traversaPartenza == traversaArrivo;
-      var differenzaTraLeColonne = Math.Abs((int) colonnaArrivo - (int) colonnaPartenza) ;
-      var differenzaTraLeTraverse = Math.Abs((int) traversaArrivo - (int) traversaPartenza) ;
-
-      if((stessaColonna && differenzaTraLeTraverse!=0) || (stessaTraversa && differenzaTraLeColonne !=0) || (differenzaTraLeColonne == differenzaTraLeTraverse && differenzaTraLeColonne != 0)){
-        return true;
-      }else{
-        return false;
-      }
+      var comeLaTorre = colonnaPartenza == colonnaArrivo || 
+      traversaPartenza == traversaArrivo;
+      return comeLaTorre? (new Torre(colore).PuòMuovere(colonnaPartenza, traversaPartenza,
+      colonnaArrivo, traversaArrivo,scacchiera)) : (new Alfiere(colore)).
+      PuòMuovere(colonnaPartenza, traversaPartenza,colonnaArrivo, traversaArrivo,scacchiera);
     }
     public override String ToString(){
       string name = "";
