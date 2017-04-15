@@ -19,13 +19,21 @@ namespace Scacchi.Modello.Pezzi{
     Traversa traversaPartenza,
     Colonna colonnaArrivo,
     Traversa traversaArrivo,
-    IScacchiera scacchiera = null)
+    IScacchiera scacchiera)
     {
       var distanzaTraLeColonne = Math.Abs(colonnaPartenza - colonnaArrivo);
       var distanzaTraLeTraverse = Math.Abs(traversaPartenza - traversaArrivo);
-
-      if((distanzaTraLeColonne==2 && distanzaTraLeTraverse==1)||(distanzaTraLeTraverse==2 && distanzaTraLeColonne ==1))
-      return true;
+      //controllo se lo spostamento è 2x1
+      if((distanzaTraLeColonne==2 && distanzaTraLeTraverse==1)||(distanzaTraLeTraverse==2 && distanzaTraLeColonne ==1)){
+        IPezzo pezzoPresente = scacchiera[colonnaArrivo, traversaArrivo].PezzoPresente;
+        //controllo pezzo non presente
+        if(pezzoPresente == null)
+          return true;
+        //pezzo del avversario
+        if(pezzoPresente.Colore != colore)
+          return true;
+        return false;
+      }
       return false;
     }
     public override String ToString(){
